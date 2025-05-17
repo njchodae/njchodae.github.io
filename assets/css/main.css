@@ -3720,6 +3720,11 @@ input, select, textarea {
 				pointer-events: none;
 				opacity: 0;
 			}
+			
+		#header.hidden {
+			top: -100px;
+		}
+
 
 /* Banner */
 
