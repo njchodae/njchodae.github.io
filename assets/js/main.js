@@ -78,6 +78,15 @@
 				leave:		function() { $header.removeClass('alt'); }
 			});
 
+		} else {
+			// Hide header when scrolled down, show when at top
+			$window.on('scroll', function () {
+				if ($window.scrollTop() === 0) {
+				$header.removeClass('hidden');
+				} else {
+				$header.addClass('hidden');
+				}
+			});
 		}
 
 })(jQuery);
