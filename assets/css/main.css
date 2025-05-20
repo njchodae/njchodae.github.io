@@ -142,7 +142,7 @@ input, select, textarea {
 		transition: color 0.5s ease, border-bottom-color 0.5s ease, background-color 1s;
 		border-bottom: dotted 1px;
 		
-		text-decoration: dotted;
+		text-decoration: none;
 	}
 
 		a:hover {
@@ -3545,11 +3545,14 @@ input, select, textarea {
 					border: 0;
 					color: inherit;
 					display: block;
-					font-size: 0.8em;
+					font-size: 0.9em;
 					/* letter-spacing: 0.225em; */
 					outline: 0;
+					text-shadow: 0px 0px 2px rgba(0, 0, 3, 0.5);
 					text-decoration: none;
-					text-transform: uppercase;
+					transition-duration: 0.5s;
+					transition-property: color, text-shadow;
+					transition-timing-function: ease-in-out;
 				}
 
 					@media screen and (max-width: 736px) {
@@ -3557,8 +3560,12 @@ input, select, textarea {
 						#menu ul > li > a {
 							line-height: 3em;
 						}
-
 					}
+
+				#menu ul > li > a:hover {
+					color: #fed416;
+					text-shadow: 0px 0px 5px rgba(0, 0, 3, 0.5);
+				}
 
 		#menu .close {
 			background-image: url("images/close.svg");
@@ -3819,7 +3826,7 @@ input, select, textarea {
 			bottom: 0;
 			color: inherit;
 			font-size: 0.8em;
-			height: 8.5em;
+			height: 4.5em;
 			left: 50%;
 			/* letter-spacing: 0.225em; */
 			margin-left: -8.5em;
@@ -3838,10 +3845,10 @@ input, select, textarea {
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: contain;
-				bottom: 4em;
+				bottom: 1em;
 				content: '';
 				display: block;
-				height: 1.5em;
+				height: 1.3em;
 				left: 50%;
 				margin: 0 0 0 -0.75em;
 				position: absolute;
@@ -4057,11 +4064,41 @@ input, select, textarea {
 		background-attachment: scroll;
 	}
 
-	.overlay {
-		position: absolute;
-		top: 0; left: 0; right: 0; bottom: 0;
-		background-color: rgba(0, 0, 0, 0.4); /* 40% 불투명도 오버레이 */
-		z-index: 1;
+	section#three.wrapper.style3.special a h2 {
+		font-size: 1.2em;
+		color: #ffffffc1;
+		text-shadow: 2px 2px 5px rgba(0, 0, 3, 0.8);
+		text-decoration: none;
+		transition-delay: 0.3s;
+		transition-duration: 1s;
+	}
+	section#three.wrapper.style3.special a:hover h2{
+		color: #fed416;
+	}
+
+	section#three.wrapper.style3.special a {
+		font-size: 1.1em;
+		color: #ffffffc1;
+		text-shadow: 2px 2px 5px rgba(0, 0, 3, 0.8);
+		text-decoration: none;
+		transition-delay: 0.3s;
+		transition-duration: 1s;
+	}
+	section#three.wrapper.style3.special a:hover {
+		color: #fed416;
+	}
+
+	section#two.wrapper.alt.style2 a {
+		font-size: inherit;
+		color: #9bcff9c1;
+		text-shadow: 0px 0px 2px rgba(0, 0, 3, 1);
+		text-decoration:dotted;
+		transition-duration: 0.5s;
+	}
+
+	section#two.wrapper.alt.style2 a:hover {
+		color: #f95959;
+		
 	}
 
 /* Footer */
