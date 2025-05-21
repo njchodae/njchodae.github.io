@@ -2429,7 +2429,7 @@ input, select, textarea {
 		color: #fff;
 		cursor: pointer;
 		display: inline-block;
-		font-size: 0.8em;
+		font-size: 1em;
 		font-weight: 600;
 		height: 3.125em;
 		line-height: 3.125em;
@@ -3545,9 +3545,10 @@ input, select, textarea {
 					border: 0;
 					color: inherit;
 					display: block;
-					font-size: 0.9em;
+					font-size: 1em;
+					font-weight: 700;
 					/* letter-spacing: 0.225em; */
-					outline: 0;
+					outline: 1;
 					text-shadow: 0px 0px 2px rgba(0, 0, 3, 0.5);
 					text-decoration: none;
 					transition-duration: 0.5s;
@@ -4000,8 +4001,8 @@ input, select, textarea {
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
 		background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-attachment: fixed;
-		background-position: center center;
+		background-attachment: scroll;
+		background-position: 50% 20%;
 		background-repeat: no-repeat;
 		background-size: cover;
 		text-align: center;
@@ -4090,7 +4091,7 @@ input, select, textarea {
 
 	section#two.wrapper.alt.style2 a {
 		font-size: inherit;
-		color: #9bcff9c1;
+		color: #fcf530ed;
 		text-shadow: 0px 0px 2px rgba(0, 0, 3, 1);
 		text-decoration:dotted;
 		transition-duration: 0.5s;
