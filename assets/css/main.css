@@ -3997,15 +3997,25 @@ input, select, textarea {
 
 	#main > header {
 		padding: 12em 0 10em 0 ;
-		/* background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg"); */
-		background-attachment: scroll;
-		background-position: 50% 20%;
+		background-position: 50% 10%;
 		background-repeat: no-repeat;
-		background-size: cover;
+		background-attachment: fixed;
+		animation: zoomFadeIn 3s ease-out forwards;
+		opacity: 0; /* start hidden */
+
 		text-align: center;
+		text-shadow: 0px 0px 5px #000;
+	}
+
+	@keyframes zoomFadeIn {
+		0% {
+			background-size: 100%;
+			opacity: 0;
+		}
+		100% {
+			background-size: 120%;
+			opacity: 1;
+		}
 	}
 
 		#main > header h2 {
@@ -4061,30 +4071,47 @@ input, select, textarea {
 
 		}
 
-	.header-zoom {
-		position: relative;
+	.header-zoom-strategy {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/why-missions-3.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/why-missions-3.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/why-missions-3.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/why-missions-3.jpg);
+	}
+
+	.header-zoom-training {
 		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
 		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
-		background-size: 100%; /* start zoomed-in */
-		background-position: center;
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		animation: zoomFadeIn 3s ease-out forwards;
-		opacity: 0; /* start hidden */
 	}
 
-		@keyframes zoomFadeIn {
-			0% {
-				background-size: 90%;
-				opacity: 0;
-			}
-			100% {
-				background-size: 110%;
-				opacity: 1;
-			}
-		}
+	.header-zoom-ot-mission {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/torah.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/torah.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/torah.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/torah.jpg);
+	}
+
+	.header-zoom-mission-trends {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/word-cloud-issue.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/word-cloud-issue.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/word-cloud-issue.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/word-cloud-issue.jpg);
+	}
+
+	.header-zoom-agencies {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
+	}
+
+	.header-zoom-required-reading {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/reading-1.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/reading-1.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/reading-1.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/reading-1.jpg);
+	}
 
 
 	body.is-mobile #main > header {
