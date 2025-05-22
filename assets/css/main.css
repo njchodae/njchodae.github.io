@@ -4099,6 +4099,13 @@ input, select, textarea {
 		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/word-cloud-issue.jpg);
 	}
 
+	.header-zoom-mission-report {
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/vintage-letters-2.jpg);
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/vintage-letters-2.jpg);
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/vintage-letters-2.jpg);
+		background-image: linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/vintage-letters-2.jpg);
+	}
+
 	.header-zoom-agencies {
 		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../../images/frontiers-go-called-to-edge-3.jpg);
