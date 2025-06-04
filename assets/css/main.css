@@ -3726,7 +3726,7 @@ input, select, textarea {
 
 			#header.alt h1 {
 				pointer-events: none;
-				opacity: 0;
+				opacity: 100;
 			}
 			
 		#header.hidden {
@@ -4253,6 +4253,20 @@ input, select, textarea {
 		background-repeat: no-repeat;
 		background-size: cover;
 		padding-top: 0;
+		animation: landingZoomFadeIn 3s ease-out forwards;
+	}
+
+	@keyframes landingZoomFadeIn {
+		0% {
+			background-size: 80%;
+			background-position: left center;
+			opacity: 0;
+		}
+		100% {
+			background-size: 110%;
+			background-position: right center;
+			opacity: 1;
+		}
 	}
 
 	body.landing #footer {
@@ -4272,6 +4286,7 @@ input, select, textarea {
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
+		animation: landingZoomFadeIn 3s ease-out forwards;
 	}
 
 	body.is-mobile.landing #footer {
