@@ -4292,3 +4292,36 @@ input, select, textarea {
 	body.is-mobile.landing #footer {
 		background-color: #1d242a;
 	}
+
+#backToTop {
+  position: fixed;
+  bottom: 10%;
+  right: 20%;
+  height: 3em;
+  padding-top:0.7em;
+  padding:0.7em 1em 1em 1em;
+  border-radius: 1.5em;
+  background-color: rgba(168, 168, 168, 0.8);
+  color: #fff;
+  font-size: 1.2em;
+  border: 3px;
+  border-color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.6s ease;
+  z-index: 1000;
+}
+
+/* Visible state */
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hover effect */
+#backToTop:hover {
+  background-color: #aaaaaa;
+  transform: translateY(-7px) ;
+}
