@@ -94,13 +94,4 @@
 	}
 	});
 
-	const target = document.getElementById("뉴저지초대교회-선교방향성");
-	backToTop.addEventListener("click", (e) => {
-		if (target) {
-		target.scrollIntoView({ behavior: "smooth" });
-	}
-	e.preventDefault();
-	window.scrollTo({ top: 200, behavior: "smooth" });
-	});
-
 })(jQuery);
