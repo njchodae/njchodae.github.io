@@ -1,0 +1,476 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Why Missions?</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+      <style>
+        .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1rem; }
+        #map { height: 500px; border: 1px solid #ddd; border-radius: 8px; }
+  
+        .map-col {
+          position: sticky;
+          top: 50px;
+          align-self: start;
+        }
+        		
+        #missionaries thead th { position: sticky; top: 0;}
+        #missionaries thead tr { background: #ffffff;}
+        #missionaries tbody tr:hover { background: #fff8e1; transition: background-color 0.5s ease-in-out;}
+        /* Ensure the sticky element's ancestors don't clip it */
+        .table-wrapper,
+        .wrapper.style5,
+        .wrapper.style5 .inner {
+          overflow: visible !important;
+        }
+
+        /* If any ancestor applies transform, it can break sticky.
+          Only do this if you see transforms on your layout wrappers. */
+        #page-wrapper,
+        article#main,
+        section.wrapper.style5 {
+          transform: none !important;
+        }
+      </style>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+
+	<body class="is-preload">	
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+      <!-- Header -->
+      <header id="header">
+        <h1><a href="index.html">Missions</a></h1>
+        <nav id="nav">
+          <ul>
+            <li class="special">
+              <a href="#menu" class="menuToggle"><span>Menu</span></a>
+              <div id="menu">
+                <ul>
+                  <li><a href="index.html">Why Missions?</a></li>
+                  <li><a href="strategy.html">선교전략</a></li>
+                  <li><a href="training.html">파송절차</a></li>
+                  <!-- <li><a href="ot-mission.html">구약의 선교</a></li>
+                  <li><a href="missions-trends.html">세계 선교 동향</a></li> -->
+                  <li><a href="agencies.html">추천 선교단체</a></li>
+                  <li><a href="missionaries.html">파송/협력 선교사</a></li>
+                  <!-- <li><a href="required-reading.html">필독서</a></li> -->
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Main -->
+      <article id="main">
+        <header style="background-image:  -webkit-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('images/LGC23.jpg');text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+          <h2>파송/협력 선교사</h2>
+          <p>초대교회에서 파송한 또는 협력하는 선교사 명단</p>
+        </header>
+        <section class="wrapper style5">
+          <div class="table-wrapper" >
+            <section class="layout"> 
+              <div class="table-col" style="white-space: nowrap;">
+                <table id="missionaries" class="highlight" style="border-collapse: collapse; width: auto; table-layout: auto; white-space: nowrap; margin-left: auto; margin-right: auto;">
+                  <thead>
+                    <tr class="header">
+                      <th>구분</th>
+                      <th>지역</th>
+                      <th>선교사 / 파송단체</th>
+                      <th>사역내용</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-region="central-asia">
+                      <td>파송</td>
+                      <td>중앙아시아</td>
+                      <td>김0호·정0자 / 초대교회</td>
+                      <td>의료 사역, 가정 사역, 장애인 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>파송</td>
+                      <td>동아시아</td>
+                      <td>송띠다·송띠마 / 초대교회</td>
+                      <td>공동체 및 지하교회 사역, 유학생 사역</td>
+                    </tr>
+                    <tr data-region="middle-east">
+                      <td>파송</td>
+                      <td>중동</td>
+                      <td>김0호·헤0로 / 초대교회</td>
+                      <td>제자화 사역</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>파송</td>
+                      <td>북아프리카</td>
+                      <td>김광율·김소망 / Frontiers</td>
+                      <td>현지인 교회 사역, 제자양육, 교회 연합 사역</td>
+                    </tr>
+                    <tr data-region="peru">
+                      <td>파송</td>
+                      <td>남미</td>
+                      <td>김도경·김혜린 / GMP</td>
+                      <td>교회 개척 및 제자훈련 사역</td>
+                    </tr>
+                    <tr data-region="peru">
+                      <td>파송</td>
+                      <td>남미</td>
+                      <td>백창호·윤애경 / SEED</td>
+                      <td>어린이 사역, 학교 사역, 교회 지원 사역</td>
+                    </tr>
+                    <tr data-region="central-asia">
+                      <td>파송</td>
+                      <td>중앙아시아</td>
+                      <td>정제레미·정한나 / SEED</td>
+                      <td>이동진료 사역, 장애인 사역, 다음세대 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>파송</td>
+                      <td>동아시아</td>
+                      <td>안사무엘·장그레이스 / SOON</td>
+                      <td>대학 캠퍼스 사역, 유학생 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>준파송</td>
+                      <td>동아시아</td>
+                      <td>박갈렙·정향기 / LOG Missions</td>
+                      <td>현지 지도자 신학훈련 및 양성 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>준파송</td>
+                      <td>동아시아</td>
+                      <td>강호건·유 / FONT</td>
+                      <td>CBI 신학교 훈련 사역</td>
+                    </tr>
+                    <tr data-region="central-asia">
+                      <td>준파송</td>
+                      <td>중앙아시아</td>
+                      <td>이다윗·정빛 / TIM</td>
+                      <td>아프간·시리아 난민 사역</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>준파송</td>
+                      <td>북아프리카</td>
+                      <td>박두레·구수정 / OM</td>
+                      <td>현지 교회사역 지원</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>준파송</td>
+                      <td>북아프리카</td>
+                      <td>브000·크0000 추 / WEC</td>
+                      <td>학교 사역 및 제자화 사역</td>
+                    </tr>
+                    <tr data-region="west-africa">
+                      <td>준파송</td>
+                      <td>서아프리카</td>
+                      <td>김윤석·김지숙</td>
+                      <td>교회개척, 고아원 사역, 초·중학교 사역</td>
+                    </tr>
+                    <tr data-region="brazil">
+                      <td>협력</td>
+                      <td>남미</td>
+                      <td>류파오로</td>
+                      <td>류파오로</td>
+                    </tr>
+                    <tr data-region="peru">
+                      <td>협력</td>
+                      <td>남미</td>
+                      <td>박남은·박성숙 / SEED</td>
+                      <td>어린이 사역, 제자화 사역, 교회 지원 사역</td>
+                    </tr>
+                    <tr data-region="argentina">
+                      <td>협력</td>
+                      <td>남미</td>
+                      <td>신요섭·허지나 / Ideas</td>
+                      <td>어린이 사역, 전도 사역, 평신도 훈련 사역</td>
+                    </tr>
+                    <tr data-region="usa">
+                      <td>협력</td>
+                      <td>북미</td>
+                      <td>Joe·Rea Choi / IVF</td>
+                      <td>대학교 캠퍼스 선교 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>협력</td>
+                      <td>동아시아</td>
+                      <td>김경환·신원 / YWAM</td>
+                      <td>열방대학 선교 네트워크, 전략, 훈련</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>협력</td>
+                      <td>동아시아</td>
+                      <td>신온유 / 치과선교회</td>
+                      <td>치과 연수 사역</td>
+                    </tr>
+                    <tr data-region="east-asia">
+                      <td>협력</td>
+                      <td>동아시아</td>
+                      <td>정요엘·이안나 / SIM</td>
+                      <td>대학 사역, 한국 문화 사역</td>
+                    </tr>
+                    <tr data-region="central-asia">
+                      <td>협력</td>
+                      <td>중앙아시아</td>
+                      <td>Zoe·Silas / Antioch</td>
+                      <td>성경 번역 사역, 현지인 사역</td>
+                    </tr>
+                    <tr data-region="central-asia">
+                      <td>협력</td>
+                      <td>중앙아시아</td>
+                      <td>정0호·정0미 / CRU</td>
+                      <td>캠퍼스 학원 사역, 교회 지원 사역</td>
+                    </tr>
+                    <tr data-region="central-asia">
+                      <td>협력</td>
+                      <td>중앙아시아</td>
+                      <td>한남운·임하경 / MVP</td>
+                      <td>현지 교회 사역자 선교훈련, 치유 사역, 제자양육</td>
+                    </tr>
+                    <tr data-region="east-africa">
+                      <td>협력</td>
+                      <td>동아프리카</td>
+                      <td>유대선·전나영 / Serving Friends</td>
+                      <td>현지인들의 식수 등을 위한 우물 사역</td>
+                    </tr>
+                    <tr data-region="east-africa">
+                      <td>협력</td>
+                      <td>동아프리카</td>
+                      <td>허정도·강정신 / PCK 세계선교부</td>
+                      <td>현지 신학교를 중심으로 목회자 양성 사역</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>김0정·다니엘 / OM</td>
+                      <td>장애인 센터 사역</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>박광석·김남희 / GMP</td>
+                      <td>이슬람 미종족들 대상 전도, 선교 동원 및 전략</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>배0연·김0선 / 치과선교회</td>
+                      <td>BAM 사역을 통한 전도 및 제자양육</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>서인·서지혜 / 치과선교회</td>
+                      <td>BAM 사역을 통한 전도 및 제자양육</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>에바 / Frontiers</td>
+                      <td>장애인 선교 사역</td>
+                    </tr>
+                    <tr data-region="north-africa">
+                      <td>협력</td>
+                      <td>북아프리카</td>
+                      <td>예제성·예제경 / 치과선교회</td>
+                      <td>전문인 사역을 통한 현지 무슬림들 전도</td>
+                    </tr>
+                    <tr data-region="europe">
+                      <td>협력</td>
+                      <td>유럽</td>
+                      <td>최종상·윤명희</td>
+                      <td>교회 개척 및 선교 동원 사역</td>
+                    </tr>
+                    <tr data-region="middle-east">
+                      <td>협력</td>
+                      <td>중동</td>
+                      <td>정마태·이은숙 / Interserve</td>
+                      <td>현지 대학생 교육 사역 및 장애인 사역</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <div class="map-col">
+                <div id="map"></div>
+              </div>
+            </section>
+            <div class="align-right" style="padding-right: 3em;">
+              Updated date: 2025-10-28
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <ul class="copyright">
+          <li>&copy; <a href="https://njchodae.org/">2025 뉴저지초대교회 | Chodae Community Church</a></li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin="" ></script>
+    <script>
+      // 1) Init map
+      const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+                  .setView([41.9, 12.5], 3);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 5, attribution: '&copy; Chodae Community Church'
+      }).addTo(map);
+
+      // 2) Define a rough bounding box for Europe (W/S, E/N)
+      //    (tweak if you want UK/Iceland/Türkiye/Norway extremes)
+      const REGIONS = {
+  "central-asia": [
+    "Kazakhstan","Kyrgyzstan","Tajikistan","Turkmenistan","Uzbekistan"
+  ],
+  "east-asia": [
+    "China","Mongolia","Japan","North Korea","South Korea","Taiwan","Hong Kong","Macau"
+  ],
+  "middle-east": [
+    "Türkiye","Turkey","Cyprus","Syria","Lebanon","Israel","Palestine","State of Palestine",
+    "Jordan","Iraq","Iran","Saudi Arabia","Yemen","Oman","United Arab Emirates","Qatar",
+    "Bahrain","Kuwait"
+  ],
+  "north-africa": [
+    "Morocco","Algeria","Tunisia","Libya","Egypt","Western Sahara"
+  ],
+  "usa": [
+    "United States of America"
+  ],
+  "south-america": [
+    "Argentina","Bolivia","Brazil","Chile","Colombia","Ecuador","Guyana","Paraguay",
+    "Peru","Suriname","Uruguay","Venezuela","French Guiana"
+  ],
+  "west-africa": [
+    "Benin","Burkina Faso","Cabo Verde","Cape Verde","Gambia","Ghana","Guinea",
+    "Guinea-Bissau","Côte d'Ivoire","Ivory Coast","Liberia","Mali","Mauritania",
+    "Niger","Nigeria","Senegal","Sierra Leone","Togo"
+  ],
+  "east-africa": [
+    "Ethiopia","Eritrea","Djibouti","Somalia","Kenya","Tanzania","Uganda","Rwanda",
+    "Burundi","South Sudan","Sudan","Mozambique","Madagascar","Comoros","Seychelles","Mauritius"
+  ],
+  "peru": [
+    "Peru"
+  ],
+  "brazil": [
+    "Brazil"
+  ],
+  "argentina": [
+    "Argentina"
+  ],
+};
+
+// ---------- Helpers ----------
+const norm = s => s.normalize('NFD').replace(/\p{Diacritic}/gu,'').replace(/\s+/g,' ').trim().toLowerCase();
+
+const REGION_SETS = Object.fromEntries(
+  Object.entries(REGIONS).map(([key, arr]) => [key, new Set(arr.map(norm))])
+);
+
+let worldGeo = null;
+const regionLayers = {};
+const regionBounds = {};
+let currentLayer = null;
+let dataReady = false;
+let pendingRegion = null;
+
+fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+  .then(r => r.json())
+  .then(geo => {
+    worldGeo = geo;
+    dataReady = true;
+    if (pendingRegion) {
+      showRegion(pendingRegion);
+      pendingRegion = null;
+    }
+  })
+  .catch(err => console.error("GeoJSON load failed:", err));
+
+function getRegionLayer(regionKey) {
+  if (regionLayers[regionKey]) return regionLayers[regionKey];
+  const wanted = REGION_SETS[regionKey];
+  if (!worldGeo || !wanted) return null;
+
+  const layer = L.geoJSON(worldGeo, {
+    filter: f => wanted.has(norm(f.properties?.name || "")),
+    style: { color: "#2563eb", weight: 2, fillColor: "#93c5fd", fillOpacity: 0.35 }
+  });
+
+  regionLayers[regionKey] = layer;
+  regionBounds[regionKey] = layer.getBounds();
+  return layer;
+}
+
+function showRegion(regionKey) {
+  if (!dataReady) { pendingRegion = regionKey; return; }
+
+  const layer = getRegionLayer(regionKey);
+  if (!layer) return;
+
+  if (currentLayer && currentLayer !== layer) map.removeLayer(currentLayer);
+  if (!map.hasLayer(layer)) map.addLayer(layer);
+  currentLayer = layer;
+
+  const b = regionBounds[regionKey];
+  if (b && b.isValid()) {
+    map.fitBounds(b, {
+      paddingTopLeft: [20, 96],   // 96px ~ header height; tweak as needed
+      paddingBottomRight: [20, 20],
+      maxZoom: 8
+    });
+  }
+}
+
+function clearRegion() {
+  if (currentLayer && map.hasLayer(currentLayer)) map.removeLayer(currentLayer);
+  currentLayer = null;
+}
+
+// ---------- Table wiring (bind to rows) ----------
+const table = document.getElementById("missionaries");
+if (table) {
+  const rows = table.querySelectorAll("tbody tr[data-region]");
+  rows.forEach(tr => {
+    const key = tr.dataset.region;
+
+    tr.addEventListener("pointerenter", () => showRegion(key));
+    tr.addEventListener("pointerleave", () => clearRegion());
+    tr.addEventListener("click", () => showRegion(key)); // tap/click support on mobile
+    tr.addEventListener("keydown", (e) => {              // keyboard accessibility
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showRegion(key); }
+    });
+    tr.tabIndex = 0; // make focusable
+  });
+
+  // If cursor leaves the whole table area, clear highlight
+  table.addEventListener("pointerleave", () => clearRegion());
+}
+</script>
+
+	</body>
+</html>
