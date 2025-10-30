@@ -449,11 +449,14 @@ section.wrapper.style5 {
 // }).addTo(map);
 
       const baseLayers = {
-        "Light": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 5, attribution: '&copy; Chodae Community Church'}),
-        "Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {maxZoom: 5,attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'})
+        "Light": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 10, attribution: '&copy; Chodae Community Church'}),
+        "Gray": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {maxZoom: 10,attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'}),
+        "NatGeo": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, NOAA, iPC',maxZoom: 10}),
+        "WorldPhysical": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service', maxZoom: 10}),
+        "USGSTopo": L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {maxZoom: 10, attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'})
       };
       L.control.layers(baseLayers).addTo(map);
-      baseLayers["Dark"].addTo(map);
+      baseLayers["USGSTopo"].addTo(map);
 
       // 2) Define a rough bounding box for Europe (W/S, E/N)
       //    (tweak if you want UK/Iceland/Türkiye/Norway extremes)
