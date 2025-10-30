@@ -85,6 +85,11 @@
   height: 500px;
 }
 
+#missionaries tr.selected {
+  background-color: #c8e6c9 !important; /* light green highlight */
+  transition: background-color 0.3s ease;
+}
+
 /* Mobile: stack vertically (top/bottom) */
 @media (max-width: 1024px) {
   .layout {
@@ -98,10 +103,20 @@
   .table-col { order: 2; }
 
   /* Optional: slightly smaller map on small screens */
-  #map { height: 380px; }
+  #map { height: 300px; }
 
   #missionaries thead th {
-          top: 380px;
+          top: 300px;
+  }
+}
+
+/* Hide 4th column on small screens */
+@media (max-width: 700px) {
+  /* hide the <th> in header */
+  table#missionaries thead th:nth-child(4),
+  /* hide the <td> in each row */
+  table#missionaries tbody td:nth-child(4) {
+    display: none;
   }
 }
 
@@ -378,15 +393,16 @@ section.wrapper.style5 {
                     </tr>
                   </tbody>
                 </table>
+                <div class="align-right" style="padding-right: 3em;">
+              Updated date: 2025-10-28
+            </div>
 
               </div>
               <div class="map-col">
                 <div id="map"></div>
               </div>
             </section>
-            <div class="align-right" style="padding-right: 3em;">
-              Updated date: 2025-10-28
-            </div>
+            
           </div>
         </section>
       </article>
@@ -426,14 +442,12 @@ section.wrapper.style5 {
 // 	attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 // }).addTo(map);
 
-
       const baseLayers = {
         "Light": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 5, attribution: '&copy; Chodae Community Church'}),
         "Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {maxZoom: 5,attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'})
       };
       L.control.layers(baseLayers).addTo(map);
       baseLayers["Dark"].addTo(map);
-
 
       // 2) Define a rough bounding box for Europe (W/S, E/N)
       //    (tweak if you want UK/Iceland/Türkiye/Norway extremes)
@@ -461,7 +475,7 @@ section.wrapper.style5 {
         ],
         "west-africa": [
           "Benin","Burkina Faso","Cabo Verde","Cape Verde","Gambia","Ghana","Guinea",
-          "Guinea-Bissau","Côte d'Ivoire","Ivory Coast","Liberia","Mali","Mauritania",
+          "Guinea Bissau","Ivory Coast","Liberia","Mali","Mauritania",
           "Niger","Nigeria","Senegal","Sierra Leone","Togo"
         ],
         "east-africa": [
@@ -504,6 +518,7 @@ section.wrapper.style5 {
   let currentLayer = null;
   let dataReady = false;
   let pendingRegion = null;
+  let lockedRow = null;
 
   fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
     .then(r => r.json())
@@ -533,49 +548,90 @@ section.wrapper.style5 {
   }
 
   function showRegion(regionKey) {
-    if (!dataReady) { pendingRegion = regionKey; return; }
+  const layer = getRegionLayer(regionKey);
+  if (!layer) return;
 
-    const layer = getRegionLayer(regionKey);
-    if (!layer) return;
+  if (currentLayer && currentLayer !== layer) map.removeLayer(currentLayer);
+  if (!map.hasLayer(layer)) map.addLayer(layer);
+  currentLayer = layer;
 
-    if (currentLayer && currentLayer !== layer) map.removeLayer(currentLayer);
-    if (!map.hasLayer(layer)) map.addLayer(layer);
-    currentLayer = layer;
-
-    const b = regionBounds[regionKey];
-    if (b && b.isValid()) {
-      map.fitBounds(b, {
-        paddingTopLeft: [20, 96],   // 96px ~ header height; tweak as needed
-        paddingBottomRight: [20, 20],
-        maxZoom: 8
-      });
-    }
+  const b = regionBounds[regionKey];
+  if (b && b.isValid()) {
+    map.fitBounds(b, {
+      paddingTopLeft: [20, 96],
+      paddingBottomRight: [20, 20],
+      maxZoom: 8
+    });
   }
+}
 
   function clearRegion() {
-    if (currentLayer && map.hasLayer(currentLayer)) map.removeLayer(currentLayer);
-    currentLayer = null;
-  }
+  if (lockedRegion) return; // skip clearing if region is locked
+  if (currentLayer && map.hasLayer(currentLayer)) map.removeLayer(currentLayer);
+  currentLayer = null;
+}
 
   // ---------- Table wiring (bind to rows) ----------
   const table = document.getElementById("missionaries");
-  if (table) {
-    const rows = table.querySelectorAll("tbody tr[data-region]");
-    rows.forEach(tr => {
-      const key = tr.dataset.region;
+if (table) {
+  const rows = table.querySelectorAll("tbody tr[data-region]");
+  rows.forEach(tr => {
+    const key = tr.dataset.region;
 
-      tr.addEventListener("pointerenter", () => showRegion(key));
-      tr.addEventListener("pointerleave", () => clearRegion());
-      tr.addEventListener("click", () => showRegion(key)); // tap/click support on mobile
-      tr.addEventListener("keydown", (e) => {              // keyboard accessibility
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showRegion(key); }
-      });
-      tr.tabIndex = 0; // make focusable
+    tr.addEventListener("pointerenter", () => {
+      if (!lockedRegion) showRegion(key);
     });
 
-    // If cursor leaves the whole table area, clear highlight
-    table.addEventListener("pointerleave", () => clearRegion());
-  }
+    tr.addEventListener("pointerleave", () => {
+      if (!lockedRegion) clearRegion();
+    });
+
+    tr.addEventListener("click", () => {
+      // --- handle locking ---
+      lockedRegion = key;
+
+      // remove highlight from previous selection
+      if (lockedRow && lockedRow !== tr) {
+        lockedRow.classList.remove("selected");
+      }
+
+      // mark the clicked row
+      lockedRow = tr;
+      lockedRow.classList.add("selected");
+
+      showRegion(key);
+    });
+
+    tr.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        lockedRegion = key;
+
+        if (lockedRow && lockedRow !== tr) {
+          lockedRow.classList.remove("selected");
+        }
+        lockedRow = tr;
+        lockedRow.classList.add("selected");
+
+        showRegion(key);
+      }
+    });
+
+    tr.tabIndex = 0;
+  });
+
+  table.addEventListener("pointerleave", () => {
+    if (!lockedRegion) clearRegion();
+  });
+
+  // double-click anywhere in the table to unlock and clear
+  table.addEventListener("dblclick", () => {
+    if (lockedRow) lockedRow.classList.remove("selected");
+    lockedRegion = null;
+    lockedRow = null;
+    clearRegion();
+  });
+}
   </script>
 
 	</body>
