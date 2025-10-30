@@ -95,6 +95,11 @@
   background-color: #c8e6c9 !important; /* light green highlight */
   transition: background-color 0.3s ease;
 }
+#missionaries tr td:nth-child(1),
+#missionaries tr td:nth-child(2)
+{
+  text-align: center;
+}
 
 /* Mobile: stack vertically (top/bottom) */
 @media (max-width: 1024px) {
@@ -185,9 +190,9 @@ section.wrapper.style5 {
               <div class="table-col" style="white-space: nowrap;">
                 <table id="missionaries" class="highlight" style="border-collapse: collapse; width: auto; table-layout: auto; white-space: nowrap; margin-left: auto; margin-right: auto;">
                   <thead>
-                    <tr >
-                      <th>구분</th>
-                      <th>지역</th>
+                    <tr>
+                      <th class="align-center">구분</th>
+                      <th class="align-center">지역</th>
                       <th>선교사 / 파송단체</th>
                       <th>사역내용</th>
                     </tr>
@@ -253,7 +258,7 @@ section.wrapper.style5 {
                       <td>강호건·유 / FONT</td>
                       <td>CBI 신학교 훈련 사역</td>
                     </tr>
-                    <tr data-region="middle-east">
+                    <tr data-region="midd">
                       <td>준파송</td>
                       <td>중동</td>
                       <td>이다윗·정빛 / TIM</td>
