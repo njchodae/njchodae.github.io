@@ -68,82 +68,96 @@
         }
 
         /* Base layout: two columns */
-.layout {
-  display: grid;
-  /* grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); */
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-  align-items: start; /* prevents stretching that can break sticky */
-}
+        .layout {
+          display: grid;
+          /* grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); */
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          padding: 1rem;
+          align-items: start; /* prevents stretching that can break sticky */
+        }
 
-/* Make each column host its own sticky child */
-.table-col .sticky,
-.map-col .sticky {
-  position: sticky;
-  top: 1em;
-  height: fit-content;            /* don’t stretch full column height */
-  max-height: calc(100vh - var(--sticky-top, 72px));
-}
+        /* Make each column host its own sticky child */
+        .table-col .sticky,
+        .map-col .sticky {
+          position: sticky;
+          top: 1em;
+          height: fit-content;            /* don’t stretch full column height */
+          max-height: calc(100vh - var(--sticky-top, 72px));
+        }
 
-/* Typical Leaflet container needs an explicit height */
-#map {
-  height: calc(100vh - 72px);
-}
+        /* Typical Leaflet container needs an explicit height */
+        #map {
+          height: calc(100vh - 72px);
+        }
 
-#missionaries tr.selected {
-  background-color: #c8e6c9 !important; /* light green highlight */
-  transition: background-color 0.3s ease;
-}
-#missionaries tr td:nth-child(1),
-#missionaries tr td:nth-child(2)
-{
-  text-align: center;
-}
+        #missionaries tr.selected {
+          background-color: #c8e6c9 !important; /* light green highlight */
+          transition: background-color 0.3s ease;
+        }
+        #missionaries tr td:nth-child(1),
+        #missionaries tr td:nth-child(2)
+        {
+          text-align: center;
+        }
 
-/* Mobile: stack vertically (top/bottom) */
-@media (max-width: 1024px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
+        /* Mobile: stack vertically (top/bottom) */
+        @media (max-width: 1024px) {
+          .layout {
+            grid-template-columns: 1fr;
+          }
 
-  /* Control stack order on mobile:
-     - table first, map second (default below)
-     - swap the numbers if you want the map first */
-  .map-col   { order: 1; top: 0px;}
-  .table-col { order: 2; }
+          /* Control stack order on mobile:
+            - table first, map second (default below)
+            - swap the numbers if you want the map first */
+          .map-col   { order: 1; top: 0px;}
+          .table-col { order: 2; }
 
-  /* Optional: slightly smaller map on small screens */
-  #map { height: 300px; }
+          /* Optional: slightly smaller map on small screens */
+          #map { height: 300px; }
 
-  #missionaries thead th {
-          top: 300px;
-  }
-}
+          #missionaries thead th {
+                  top: 300px;
+          }
+        }
 
-/* Hide 4th column on small screens */
-@media (max-width: 700px) {
-  /* hide the <th> in header */
-  table#missionaries thead th:nth-child(4),
-  /* hide the <td> in each row */
-  table#missionaries tbody td:nth-child(4) {
-    display: none;
-  }
-}
+        /* Hide 4th column on small screens */
+        @media (max-width: 700px) {
+          /* hide the <th> in header */
+          table#missionaries thead th:nth-child(4),
+          /* hide the <td> in each row */
+          table#missionaries tbody td:nth-child(4) {
+            display: none;
+          }
+        }
 
-/* Sticky-friendly ancestors (important) */
-.table-wrapper,
-.wrapper.style5,
-.wrapper.style5 .inner {
-  overflow: visible !important;
-}
+        /* Sticky-friendly ancestors (important) */
+        .table-wrapper,
+        .wrapper.style5,
+        .wrapper.style5 .inner {
+          overflow: visible !important;
+        }
 
-/* If any ancestor uses transform, it can break sticky */
-#page-wrapper,
-article#main,
-section.wrapper.style5 {
-  transform: none !important;
-}
+        /* If any ancestor uses transform, it can break sticky */
+        #page-wrapper,
+        article#main,
+        section.wrapper.style5 {
+          transform: none !important;
+        }
+
+        #tooltip {
+          position: fixed;
+          background-color: rgba(60, 60, 60, 0.5);
+          color: #fff;
+          padding: 8px 12px;
+          border-radius: 6px;
+          font-size: 0.9rem;
+          white-space: nowrap;
+          pointer-events: none;
+          opacity: 0;                /* 기본은 숨김 */
+          transition: opacity 0.25s ease;  /* 페이드 효과 */
+          z-index: 1000;
+        }
 
       </style>
 
@@ -427,6 +441,9 @@ section.wrapper.style5 {
       </footer>
     </div>
 
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.scrollex.min.js"></script>
@@ -443,15 +460,6 @@ section.wrapper.style5 {
       // 1) Init map
       const map = L.map('map', { zoomControl: false, worldCopyJump: true })
                   .setView([41.9, 12.5], 3);
-
-      // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 5, attribution: '&copy; Chodae Community Church'}).addTo(map);
-
-      // L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {maxZoom: 5,attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
-
-//         L.tileLayer('https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png', {
-// 	maxZoom: 18,
-// 	attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
 
       const baseLayers = {
         "Light": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 10, attribution: '&copy; Chodae Community Church'}),
@@ -519,134 +527,194 @@ section.wrapper.style5 {
         ]
       };
 
-  // ---------- Helpers ----------
-  const norm = s => s.normalize('NFD').replace(/\p{Diacritic}/gu,'').replace(/\s+/g,' ').trim().toLowerCase();
 
-  const REGION_SETS = Object.fromEntries(
-    Object.entries(REGIONS).map(([key, arr]) => [key, new Set(arr.map(norm))])
-  );
+      // ---------- Helpers ----------
+      const norm = (s) =>
+        s
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
 
-  let worldGeo = null;
-  const regionLayers = {};
-  const regionBounds = {};
-  let currentLayer = null;
-  let dataReady = false;
-  let pendingRegion = null;
-  let lockedRegion = null;
-  let lockedRow = null;
+      const REGION_SETS = Object.fromEntries(
+        Object.entries(REGIONS).map(([key, arr]) => [key, new Set(arr.map(norm))])
+      );
 
-  fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
-    .then(r => r.json())
-    .then(geo => {
-      worldGeo = geo;
-      dataReady = true;
-      if (pendingRegion) {
-        showRegion(pendingRegion);
-        pendingRegion = null;
-      }
-    })
-    .catch(err => console.error("GeoJSON load failed:", err));
+      let worldGeo = null;
+      const regionLayers = {};
+      const regionBounds = {};
+      let currentLayer = null;
+      let dataReady = false;
+      let pendingRegion = null;
+      let lockedRegion = null;
+      let lockedRow = null;
 
-  function getRegionLayer(regionKey) {
-    if (regionLayers[regionKey]) return regionLayers[regionKey];
-    const wanted = REGION_SETS[regionKey];
-    if (!worldGeo || !wanted) return null;
+      fetch(
+        "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+      )
+        .then((r) => r.json())
+        .then((geo) => {
+          worldGeo = geo;
+          dataReady = true;
+          if (pendingRegion) {
+            showRegion(pendingRegion);
+            pendingRegion = null;
+          }
+        })
+        .catch((err) => console.error("GeoJSON load failed:", err));
 
-    const layer = L.geoJSON(worldGeo, {
-      filter: f => wanted.has(norm(f.properties?.name || "")),
-      style: { color: "#2563eb", weight: 2, fillColor: "#93c5fd", fillOpacity: 0.35 }
-    });
+      function getRegionLayer(regionKey) {
+        if (regionLayers[regionKey]) return regionLayers[regionKey];
+        const wanted = REGION_SETS[regionKey];
+        if (!worldGeo || !wanted) return null;
 
-    regionLayers[regionKey] = layer;
-    regionBounds[regionKey] = layer.getBounds();
-    return layer;
-  }
+        const layer = L.geoJSON(worldGeo, {
+          filter: (f) => wanted.has(norm(f.properties?.name || "")),
+          style: {
+            color: "#2563eb",
+            weight: 2,
+            fillColor: "#93c5fd",
+            fillOpacity: 0.35,
+          },
+        });
 
-  function showRegion(regionKey) {
-  const layer = getRegionLayer(regionKey);
-  if (!layer) return;
-
-  if (currentLayer && currentLayer !== layer) map.removeLayer(currentLayer);
-  if (!map.hasLayer(layer)) map.addLayer(layer);
-  currentLayer = layer;
-
-  const b = regionBounds[regionKey];
-  if (b && b.isValid()) {
-    map.fitBounds(b, {
-      paddingTopLeft: [20, 96],
-      paddingBottomRight: [20, 20],
-      maxZoom: 8
-    });
-  }
-}
-
-  function clearRegion() {
-  if (lockedRegion) return; // skip clearing if region is locked
-  if (currentLayer && map.hasLayer(currentLayer)) map.removeLayer(currentLayer);
-  currentLayer = null;
-}
-
-  // ---------- Table wiring (bind to rows) ----------
-  const table = document.getElementById("missionaries");
-if (table) {
-  const rows = table.querySelectorAll("tbody tr[data-region]");
-  rows.forEach(tr => {
-    const key = tr.dataset.region;
-
-    tr.addEventListener("pointerenter", () => {
-      if (!lockedRegion) showRegion(key);
-    });
-
-    tr.addEventListener("pointerleave", () => {
-      if (!lockedRegion) clearRegion();
-    });
-
-    tr.addEventListener("click", () => {
-      // --- handle locking ---
-      lockedRegion = key;
-
-      // remove highlight from previous selection
-      if (lockedRow && lockedRow !== tr) {
-        lockedRow.classList.remove("selected");
+        regionLayers[regionKey] = layer;
+        regionBounds[regionKey] = layer.getBounds();
+        return layer;
       }
 
-      // mark the clicked row
-      lockedRow = tr;
-      lockedRow.classList.add("selected");
+      function showRegion(regionKey) {
+        const layer = getRegionLayer(regionKey);
+        if (!layer) return;
 
-      showRegion(key);
-    });
+        if (currentLayer && currentLayer !== layer) map.removeLayer(currentLayer);
+        if (!map.hasLayer(layer)) map.addLayer(layer);
+        currentLayer = layer;
 
-    tr.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        lockedRegion = key;
-
-        if (lockedRow && lockedRow !== tr) {
-          lockedRow.classList.remove("selected");
+        const b = regionBounds[regionKey];
+        if (b && b.isValid()) {
+          map.fitBounds(b, {
+            paddingTopLeft: [20, 96],
+            paddingBottomRight: [20, 20],
+            maxZoom: 8,
+          });
         }
-        lockedRow = tr;
-        lockedRow.classList.add("selected");
-
-        showRegion(key);
       }
-    });
 
-    tr.tabIndex = 0;
-  });
+      function clearRegion() {
+        if (lockedRegion) return; // skip clearing if region is locked
+        if (currentLayer && map.hasLayer(currentLayer)) map.removeLayer(currentLayer);
+        currentLayer = null;
+      }
 
-  table.addEventListener("pointerleave", () => {
-    if (!lockedRegion) clearRegion();
-  });
+      // ---------- Table wiring (bind to rows) ----------
+      const table = document.getElementById("missionaries");
+      if (table) {
+        const rows = table.querySelectorAll("tbody tr[data-region]");
+        rows.forEach((tr) => {
+          const key = tr.dataset.region;
 
-  // double-click anywhere in the table to unlock and clear
-  table.addEventListener("dblclick", () => {
-    if (lockedRow) lockedRow.classList.remove("selected");
-    lockedRegion = null;
-    lockedRow = null;
-    clearRegion();
-  });
-}
+          tr.addEventListener("pointerenter", () => {
+            if (!lockedRegion) showRegion(key);
+          });
+
+          tr.addEventListener("pointerleave", () => {
+            if (!lockedRegion) clearRegion();
+          });
+
+          tr.addEventListener("click", () => {
+            // --- handle locking ---
+            lockedRegion = key;
+
+            // remove highlight from previous selection
+            if (lockedRow && lockedRow !== tr) {
+              lockedRow.classList.remove("selected");
+            }
+
+            // mark the clicked row
+            lockedRow = tr;
+            lockedRow.classList.add("selected");
+
+            showRegion(key);
+          });
+
+          tr.tabIndex = 0;
+        });
+
+        table.addEventListener("pointerleave", () => {
+          if (!lockedRegion) clearRegion();
+        });
+
+        // double-click anywhere in the table to unlock and clear
+        table.addEventListener("dblclick", () => {
+          if (lockedRow) lockedRow.classList.remove("selected");
+          lockedRegion = null;
+          lockedRow = null;
+          clearRegion();
+        });
+      }
+
+      const tooltip = document.getElementById("tooltip");
+
+      const TOOLTIP_TEXT =
+        "마우스를 double-click 하시거나 ESC키를 누르시면 선택이 해제됩니다";
+
+      table.addEventListener("pointermove", (e) => {
+        if (lockedRow) {
+          tooltip.textContent = TOOLTIP_TEXT;
+
+          const OFFSET_X = - 150;
+          const OFFSET_Y = 16;
+
+          let x = e.clientX + OFFSET_X;
+          let y = e.clientY + OFFSET_Y;
+
+          const ttRect = tooltip.getBoundingClientRect();
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+
+          // keep tooltip inside viewport
+          if (x < 4) {
+            x = 8;
+          } else if (x + ttRect.width > vw - 4) {
+            x = vw - ttRect.width - 20;
+          }
+
+          // keep tooltip inside viewport vertically
+          if (y + ttRect.height > vh - 4) {
+            y = e.clientY - ttRect.height - 8;
+          }
+
+          tooltip.style.left = x + "px";
+          tooltip.style.top = y + "px";
+          tooltip.style.opacity = 1;
+        } else {
+          tooltip.style.opacity = 0;
+        }
+      });
+
+      table.addEventListener("pointerleave", () => {
+        tooltip.style.opacity = 0;
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lockedRow) {
+          lockedRow.classList.remove("selected");
+          lockedRow = null;
+          lockedRegion = null;
+          tooltip.style.opacity = 0;
+        }
+      });
+
+      table.addEventListener("dblclick", () => {
+        if (lockedRow) {
+          lockedRow.classList.remove("selected");
+          lockedRow = null;
+          lockedRegion = null;
+          tooltip.style.opacity = 0;
+        }
+      });
   </script>
 
 	</body>
