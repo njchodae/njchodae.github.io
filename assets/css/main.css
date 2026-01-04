@@ -3874,6 +3874,94 @@ input, select, textarea {
 		}
 	}
 
+	.borders-hero {
+		background: radial-gradient(circle at 50% 40%, #101010 0%, #050505 60%, #020202 100%);
+		min-height: 92vh;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+		animation: none;
+		opacity: 1;
+		color: #f6f6f6;
+		text-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+		background-attachment: scroll;
+	}
+
+	.borders-hero__line {
+		position: absolute;
+		overflow: hidden;
+		height: 3rem; 
+		left: 50%;
+		top: 50%;
+		width: min(100vw, 1900px);
+		transform-origin: center;
+		transform: translate(-50%, 0vh) scaleX(0);
+		opacity: 0;
+		animation: bordersLineRise 2.6s ease-out 0.2s forwards, bordersLineUp 2s ease-in 2.8s forwards;
+	}
+
+	.borders-hero__line-text {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		font-size: clamp(0.2rem, 2vw, 2rem);
+		letter-spacing: 0.1em;
+		opacity: 0;
+		color: rgba(255, 255, 255, 0.7);
+		text-transform: uppercase;
+		white-space: nowrap;
+		animation:   bordersLineTextIn 3.4s ease-out 0.3s forwards, bordersLineTextUp 2s ease-in 3.9s forwards;
+	}
+
+	@keyframes bordersLineRise {
+		0% {
+			transform: translate(-50%, 40vh) scaleX(1);
+			opacity: .7;
+		}
+		100% {
+			transform: translate(-50%, 0) scaleX(1);
+			opacity: 1;
+		}
+	}
+
+	@keyframes bordersLineUp {
+		0% {
+			opacity: 1;
+			transform: translate(-50%, 0) scaleX(1);
+		}
+		100% {
+			opacity: 0;
+			transform: translate(-50%, -70vh) scaleX(1);
+		}
+		}
+
+	@keyframes bordersLineTextIn {
+		0% {
+			opacity: 0.7;
+			transform: translate(-50%, -50%) scale(0.2);
+		}
+		100% {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(2);
+		}
+	}
+
+		/* 추가: 위로 빠져나가기 */
+		@keyframes bordersLineTextUp {
+		0% {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(2);
+		}
+		100% {
+			opacity: 0;
+			transform: translate(-50%, -70vh) scale(2);
+		}
+	}
+
 		#main > header h2 {
 			font-size: 1.75em;
 			margin: 0 0 0.5em 0;
