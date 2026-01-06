@@ -3810,6 +3810,7 @@ input, select, textarea {
 			height: 4.5em;
 			left: 50%;
 			margin-left: -8.5em;
+			margin-bottom: 3em;
 			opacity: 0;
 			outline: 0;
 			padding-left: 0.225em;
