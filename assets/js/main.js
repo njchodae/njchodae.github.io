@@ -193,8 +193,8 @@
 				// 0.60~0.80 : enter from below to center + shrink to maskMin
 				// 0.80~0.90 : move up + fade out (size stays maskMin)
 				// -------------------------
-				var beyondEnterT = easeOutCubic(segment(p, 0.30, 0.55));  // 0..1
-				var beyondExitT  = easeInCubic(segment(p, 0.55, 0.85));   // 0..1
+				var beyondEnterT = easeOutCubic(segment(p, 0.32, 0.57));  // 0..1
+				var beyondExitT  = easeInCubic(segment(p, 0.57, 0.85));   // 0..1
 
 				var beyondSize = lerp(maskMax, maskMin, beyondEnterT);    // vh
 				if (p >= 0.80) beyondSize = maskMin;
