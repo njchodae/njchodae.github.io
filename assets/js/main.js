@@ -59,7 +59,7 @@
 				var targetTop = $target.offset().top - $header.outerHeight();
 				var startY = window.pageYOffset || document.documentElement.scrollTop;
 				var targetY = Math.max(targetTop, 0);
-				var duration = 9000;
+				var duration = 8000;
 				var startTime = performance.now();
 
 				var cancelHeroScroll = function() {

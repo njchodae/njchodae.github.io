@@ -2676,6 +2676,128 @@ input, select, textarea {
 
 			}
 
+	/* News */
+
+	.news {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-moz-justify-content: center;
+		-webkit-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
+		list-style: none;
+		padding: 0;
+		width: 100%;
+	}
+
+		.news li {
+			padding: 4em 4em 2em 6em ;
+			display: block;
+			position: relative;
+			text-align: left;
+		}
+
+			.news li:nth-child(1) {
+				background-color: rgba(0, 0, 0, 0.035);
+			}
+
+			.news li:nth-child(2) {
+				background-color: rgba(0, 0, 0, 0.07);
+			}
+
+			.news li:nth-child(3) {
+				background-color: rgba(0, 0, 0, 0.105);
+			}
+
+			.news li:nth-child(4) {
+				background-color: rgba(0, 0, 0, 0.14);
+			}
+
+			.news li:nth-child(5) {
+				background-color: rgba(0, 0, 0, 0.175);
+			}
+
+			.news li:nth-child(6) {
+				background-color: rgba(0, 0, 0, 0.21);
+			}
+
+			.news li:nth-child(7) {
+				background-color: rgba(0, 0, 0, 0.245);
+			}
+
+			.news li:nth-child(8) {
+				background-color: rgba(0, 0, 0, 0.28);
+			}
+
+			.news li:nth-child(9) {
+				background-color: rgba(0, 0, 0, 0.315);
+			}
+
+			.news li:nth-child(10) {
+				background-color: rgba(0, 0, 0, 0.35);
+			}
+
+			.news li:before {
+				display: block;
+				color: #00ffcc;
+				position: absolute;
+				left: 1.75em;
+				top: 2.75em;
+				font-size: 1.5em;
+			}
+
+			.news li:nth-child(1) {
+				border-top-left-radius: 3px;
+			}
+
+			.news li:nth-child(2) {
+				border-top-right-radius: 3px;
+			}
+
+			.news li:nth-last-child(1) {
+				border-bottom-right-radius: 3px;
+			}
+
+			.news li:nth-last-child(2) {
+				border-bottom-left-radius: 3px;
+			}
+
+			@media screen and (max-width: 980px) {
+
+				.news li {
+					padding: 3em 2em 1em 2em ;
+				}
+
+					.news li:before {
+						left: 0;
+						margin: 0 0 1em 0;
+						position: relative;
+						top: 0;
+					}
+
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.news li {
+					padding: 3em 0 1em 0 ;
+					background-color: transparent !important;
+					border-top: solid 2px #fff;
+					width: 100%;
+				}
+
+					.news li:first-child {
+						border-top: 0;
+					}
+
+			}
+
 /* Spotlight */
 
 	.spotlight {
