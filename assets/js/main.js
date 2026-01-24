@@ -59,7 +59,7 @@
 				var targetTop = $target.offset().top - $header.outerHeight();
 				var startY = window.pageYOffset || document.documentElement.scrollTop;
 				var targetY = Math.max(targetTop, 0);
-				var duration = 8000;
+				var duration = 6000;
 				var startTime = performance.now();
 
 				var cancelHeroScroll = function() {
@@ -178,7 +178,7 @@
 				// 0.60~0.80 : move up + fade out (size stays maskMin)
 				// -------------------------
 				var loveShrinkT = easeOutCubic(segment(p, 0.00, 0.50));   // 0..1
-				var loveExitT   = easeInCubic(segment(p, 0.40, 0.70));    // 0..1
+				var loveExitT   = easeInCubic(segment(p, 0.45, 1.0));    // 0..1
 
 				var loveSize = lerp(maskMax, maskMin, loveShrinkT);       // vh
 				
@@ -193,8 +193,8 @@
 				// 0.60~0.80 : enter from below to center + shrink to maskMin
 				// 0.80~0.90 : move up + fade out (size stays maskMin)
 				// -------------------------
-				var beyondEnterT = easeOutCubic(segment(p, 0.32, 0.57));  // 0..1
-				var beyondExitT  = easeInCubic(segment(p, 0.57, 0.85));   // 0..1
+				var beyondEnterT = easeOutCubic(segment(p, 0.20, 0.80));  // 0..1
+				var beyondExitT  = easeInCubic(segment(p, 0.80, 1.5));   // 0..1
 
 				var beyondSize = lerp(maskMax, maskMin, beyondEnterT);    // vh
 				if (p >= 0.80) beyondSize = maskMin;
@@ -203,7 +203,7 @@
 				var beyondTyEnter = lerp(window.innerHeight * 0.45, 0, beyondEnterT);
 				
 				var beyondTyExit  = lerp(0, -window.innerHeight * 0.90, beyondExitT);
-				var beyondTy = (p < 0.60) ? beyondTyEnter : beyondTyExit;
+				var beyondTy = (p < 0.80) ? beyondTyEnter : beyondTyExit;
 
 				// opacity: enter에서 0→1, exit에서 1→0
 				var beyondOp = lerp(0, 1, beyondEnterT) * lerp(1, 0, beyondExitT);
