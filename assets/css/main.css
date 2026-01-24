@@ -4837,7 +4837,6 @@ input, select, textarea {
   background-image: url("../../images/pathway.jpg");
   background-size: cover;
   background-position: center;
-  filter: brightness(0.9) saturate(0.95) contrast(1.05);
 }
 
 .intro__bg3 {
@@ -4846,7 +4845,6 @@ input, select, textarea {
   background-image: url("../../images/road-2.jpg");
   background-size: cover;
   background-position: center;
-  filter: brightness(0.8) saturate(0.95) contrast(1.0);
 }
 
 	.intro__content {
@@ -4905,15 +4903,10 @@ input, select, textarea {
 }
 
 @media screen and (max-width: 736px) {
-	.hero__sticky {
-		height: 100svh;
-	}
-
 	.hero__video {
 		object-fit: contain;
 		transform: translate(-50%, -50%) scale(0.90);
 	}
-
 	
 	.wrapper.style7 {
 		padding: 2em;
@@ -4921,8 +4914,6 @@ input, select, textarea {
 }
 
 @media screen and (max-width: 480px) {
-
-	
 
 	.wrapper.style7 {
 		padding: 1em;
