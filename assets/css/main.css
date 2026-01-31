@@ -4891,6 +4891,71 @@ input, select, textarea {
 		padding-top: 1em;
 	}
 
+	.placeholder-wrap{
+		position: relative;
+		padding: 2.5rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 12px;
+		background: #fff;
+		overflow: hidden;
+	}
+
+	.stamp{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(-30deg);
+		transform-origin: center;
+		pointer-events: none;
+		user-select: none;
+		z-index: 10;
+
+		font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+		font-weight: 900;
+		font-size: clamp(2.2rem, 6vw, 4.2rem);
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: #b91c1c;            /* stamp red */
+		opacity: 0.28;
+		line-height: 1;
+
+		/* enhance stamp color */
+		filter: saturate(1.05) contrast(1.1);
+		text-shadow:
+			1px 1px 0 rgba(0,0,0,0.06),
+			-1px 0 0 rgba(0,0,0,0.05),
+			0 -1px 0 rgba(255,255,255,0.06);
+	}
+
+	/* stamp frame */
+	.stamp::before{
+		content: "";
+		position: absolute;
+		inset: -0.55em -0.75em;
+		border: 6px solid currentColor;
+		border-radius: 20px;
+		opacity: 0.65;
+		transform: rotate(1.5deg); /* tilt the frame slightly */
+		}
+
+	/* stamp ink texture */
+	.stamp::after{
+		content: "";
+		position: absolute;
+		inset: -0.9em -1.1em;
+		border-radius: 12px;
+		opacity: 0.50;
+		background:
+			radial-gradient(circle at 10% 20%, rgba(0,0,0,0.25) 0 1px, transparent 2px),
+			radial-gradient(circle at 70% 40%, rgba(0,0,0,0.22) 0 1px, transparent 2px),
+			radial-gradient(circle at 30% 80%, rgba(0,0,0,0.20) 0 1px, transparent 2px),
+			radial-gradient(circle at 90% 70%, rgba(0,0,0,0.20) 0 1px, transparent 2px);
+		background-size: 18px 18px;
+		mix-blend-mode: multiply;
+		filter: blur(0.9px);
+	}
+
+
 @media screen and (max-width: 1280px) {
 
 	.intro__content {
