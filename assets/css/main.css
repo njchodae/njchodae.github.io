@@ -2361,10 +2361,15 @@ input, select, textarea {
 			border: solid 1px #fff;
 			border-left: 0;
 			border-right: 0;
+			transition: background-color 0.2s ease-in-out;
 		}
 
 			table tbody tr:nth-child(2n + 1) {
 				background-color: rgba(144, 144, 144, 0.25);
+			}
+
+			table tbody tr:hover {
+				background-color: rgba(255, 255, 255, 0.18);
 			}
 
 		table td {
