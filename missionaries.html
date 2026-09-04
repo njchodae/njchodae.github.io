@@ -569,7 +569,7 @@
       let lockedRow = null;
 
       fetch(
-        "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+        "./assets/data/countries-merged.geo.json"
       )
         .then((r) => r.json())
         .then((geo) => {
